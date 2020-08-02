@@ -15,12 +15,13 @@ package majordomo
 
 import (
 	"context"
-	"net/url"
 )
 
 // Service is the interface for a majordomo.
 // A majordomo takes key requests in the form of custom URLs and returns the related value.
 type Service interface {
-	// Fetch fetches a value given its URL.
-	Fetch(ctx context.Context, url *url.URL) ([]byte, error)
+	// Fetch fetches a value given its key.
+	// The key is usually defined as a URL, although it is possible that some
+	// confidants may require or accept a different format.
+	Fetch(ctx context.Context, key string) ([]byte, error)
 }

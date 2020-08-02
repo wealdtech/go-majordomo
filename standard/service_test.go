@@ -58,6 +58,15 @@ func TestFetch(t *testing.T) {
 	}
 }
 
+func TestInterface(t *testing.T) {
+	ctx := context.Background()
+	var service majordomo.Service
+	var err error
+	service, err = standard.New(ctx, standard.WithLogLevel(zerolog.Disabled))
+	require.NoError(t, err)
+	require.NotNil(t, service)
+}
+
 func TestRegister(t *testing.T) {
 	ctx := context.Background()
 	service, err := standard.New(ctx, standard.WithLogLevel(zerolog.Disabled))
