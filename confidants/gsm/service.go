@@ -30,11 +30,11 @@ import (
 
 // Service returns values from Google secrets manager.
 // This service handles URLs with the scheme "gsm".
-// A full URL is of the form "gsm://id:secret@project/secret".
-// ID and secret can be supplied at creation time if preferred.
-// region can also be supplied at creation time if preferred.
+// A full URL is of the form "gsm://id@project/secret".
+// ID can be supplied at creation time if preferred.
+// project can also be supplied at creation time if preferred.
 // If both are supplied URLs are of the form "gsm:///secret".
-// Any provision of ID and secret or of region will override the defaults.
+// Any provision of ID or of project will override the defaults.
 // N.B. the project value is the project _ID_ not the project name.
 type Service struct {
 	credentialsPath string
