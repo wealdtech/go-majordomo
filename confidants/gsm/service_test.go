@@ -30,7 +30,7 @@ import (
 func TestFetch(t *testing.T) {
 	credentialsPath := os.Getenv("MAJORDOMO_GSM_TEST_CREDENTIALS_PATH")
 	project := os.Getenv("MAJORDOMO_GSM_TEST_PROJECT")
-	secretKey := os.Getenv("MAJORDOMO_ASM_TEST_SECRET_KEY")
+	secretKey := os.Getenv("MAJORDOMO_GSM_TEST_SECRET_KEY")
 	if credentialsPath == "" || project == "" || secretKey == "" {
 		t.Skip("Environment variables MAJORDOMO_GSM_TEST_CREDENTIALS_PATH MAJORDOMO_GSM_TEST_PROJECT MAJORDOMO_GSM_TEST_SECRET_KEY required for this test")
 	}
@@ -94,7 +94,7 @@ func TestFetch(t *testing.T) {
 func TestOverrides(t *testing.T) {
 	credentialsPath := os.Getenv("MAJORDOMO_GSM_TEST_CREDENTIALS_PATH")
 	project := os.Getenv("MAJORDOMO_GSM_TEST_PROJECT")
-	secretKey := os.Getenv("MAJORDOMO_ASM_TEST_SECRET_KEY")
+	secretKey := os.Getenv("MAJORDOMO_GSM_TEST_SECRET_KEY")
 	if credentialsPath == "" || project == "" || secretKey == "" {
 		t.Skip("Environment variables MAJORDOMO_GSM_TEST_CREDENTIALS_PATH MAJORDOMO_GSM_TEST_PROJECT MAJORDOMO_GSM_TEST_SECRET_KEY required for this test")
 	}
