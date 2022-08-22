@@ -33,6 +33,7 @@ Majordomo manages _confidants_.  A confidant is a module that holds secrets that
   - `file` secrets that are held in a named file
   - `asm` secrets that are stored on Amazon secrets manager
   - `gsm` secrets that are stored on Google secrets manager
+  - `http` secrets that are stored on a remote server accessed by HTTP or HTTPS
 
 Details about how to configure each confidant are in the relevant confidant's go docs.
 
@@ -91,4 +92,4 @@ Contributions welcome. Please check out [the issues](https://github.com/wealdtec
 
 ## License
 
-[Apache-2.0](LICENSE) © 2019 Weald Technology Trading Ltd
+[Apache-2.0](LICENSE) © 2019 - 2022 Weald Technology Trading Ltd
