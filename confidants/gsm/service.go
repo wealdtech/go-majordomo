@@ -88,6 +88,7 @@ func (s *Service) Fetch(ctx context.Context, url *url.URL) ([]byte, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to create client connection")
 	}
+	defer client.Close()
 
 	path := fmt.Sprintf("projects/%s/secrets/%s/versions/latest", url.Host, url.Path)
 	log.Trace().Str("path", path).Msg("Secret path")
