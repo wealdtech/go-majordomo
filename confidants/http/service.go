@@ -189,7 +189,7 @@ func (s *Service) fetchWithOptions(ctx context.Context, url *url.URL) ([]byte, e
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Debug().Msg("Failed to call endpoint")
+		log.Debug().Err(err).Msg("Failed to call endpoint")
 		return nil, majordomo.ErrNotFound
 	}
 	if resp == nil {
