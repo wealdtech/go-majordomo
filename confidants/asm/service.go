@@ -92,6 +92,8 @@ func (s *Service) Fetch(ctx context.Context, url *url.URL) ([]byte, error) {
 	case s.credentials != nil:
 		config = config.WithCredentials(s.credentials)
 	}
+	// If no explicit credentials are configured, the AWS SDK falls back to its
+	// default credential chain instead of requiring environment credentials.
 	session, err := session.NewSession(config)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to initiate session with Amazon secrets manager")
