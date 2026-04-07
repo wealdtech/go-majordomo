@@ -16,6 +16,7 @@ package asm_test
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"os"
 	"testing"
 
@@ -146,4 +147,25 @@ func TestOverrides(t *testing.T) {
 	assert.Equal(t, string(secret1), string(secret2))
 	assert.Equal(t, string(secret2), string(secret3))
 	assert.Equal(t, string(secret3), string(secret4))
+}
+
+func TestFetchUsesDefaultCredentialChain(t *testing.T) {
+	t.Setenv("AWS_ACCESS_KEY_ID", "")
+	t.Setenv("AWS_SECRET_ACCESS_KEY", "")
+	t.Setenv("AWS_SHARED_CREDENTIALS_FILE", "/nonexistent")
+
+	ctx := context.Background()
+	confidant, err := asm.New(ctx,
+		asm.WithLogLevel(zerolog.Disabled),
+		asm.WithRegion("us-east-1"),
+	)
+	require.NoError(t, err)
+
+	secretURL, err := url.Parse("asm:///test-secret")
+	require.NoError(t, err)
+
+	_, err = confidant.Fetch(ctx, secretURL)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "NoCredentialProviders")
+	require.NotContains(t, err.Error(), "EnvAccessKeyNotFound")
 }
