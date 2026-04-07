@@ -84,17 +84,15 @@ func (s *Service) Fetch(ctx context.Context, url *url.URL) ([]byte, error) {
 		return nil, errors.New("no secret specified")
 	}
 
-	var creds *credentials.Credentials
+	config := aws.NewConfig().WithRegion(url.Host)
 	password, hasPassword := url.User.Password()
 	switch {
 	case hasPassword:
-		creds = credentials.NewStaticCredentials(url.User.Username(), password, "")
+		config = config.WithCredentials(credentials.NewStaticCredentials(url.User.Username(), password, ""))
 	case s.credentials != nil:
-		creds = s.credentials
-	default:
-		creds = credentials.NewEnvCredentials()
+		config = config.WithCredentials(s.credentials)
 	}
-	session, err := session.NewSession(aws.NewConfig().WithRegion(url.Host).WithCredentials(creds))
+	session, err := session.NewSession(config)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to initiate session with Amazon secrets manager")
 	}
